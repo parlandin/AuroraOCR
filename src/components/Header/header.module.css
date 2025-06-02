@@ -1,6 +1,6 @@
 .header {
   padding: 10px 20px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc7d;
   font-family: "Roboto", sans-serif;  
 }
 
@@ -15,11 +15,22 @@
 }
 
 .header__logo {
-  font-size: 24px;
   font-weight: bold;
   display: flex;
   align-items: center;
+
+  @media (max-width: 430px) {
+   & img {
+      width: 50px;
+      height: 50px;
+    }
+
+    & .header__logo_text {
+      font-size: 1.1rem;
+    }
+   }
 }
+
 
 .header__logo_image {
   width: 100%;
@@ -54,15 +65,26 @@
   font-weight: 500;
   font-size: 1rem;
 
+
   &:hover {
     color: #007bff;
   }
+
+  @media (max-width: 800px) {
+    font-size: 0.8rem;
+  }
+
+   
 }
 
 .header__nav_link {
   text-decoration: none;
   color: inherit;
   font-weight: inherit;
+
+  @media (max-width: 680px) {
+   display: none;
+  }
 }
 
 .header__nav_button {
@@ -81,6 +103,10 @@
 
   &:hover {
     background-color: #45a0d4;
+  }
+
+  @media (max-width: 800px) {
+    font-size: 0.8rem;
   }
 }
 
