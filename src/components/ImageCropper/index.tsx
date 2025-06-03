@@ -23,19 +23,17 @@ import module from "./imageCropper.module.css";
 
 interface ImageCropperProps {
   image: string;
+  scale?: number;
+  crop: Crop;
+  setCrop: React.Dispatch<React.SetStateAction<Crop>>;
 }
 
-export function ImageCropper({ image }: ImageCropperProps) {
-  const [crop, setCrop] = React.useState<Crop>({
-    unit: "%",
-    width: 50,
-    height: 50,
-    x: 25,
-    y: 25,
-  });
-
-  const [scale, setScale] = React.useState<number>(1);
-
+export function ImageCropper({
+  image,
+  scale,
+  crop,
+  setCrop,
+}: ImageCropperProps) {
   function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
     const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
 
@@ -60,36 +58,9 @@ export function ImageCropper({ image }: ImageCropperProps) {
     setCrop(percentCrop);
   }
 
-  function onScaleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const newScale = parseFloat(e.target.value);
-    setScale(newScale);
-  }
-
-  function resetPosition() {
-    setCrop({
-      unit: "%",
-      width: 50,
-      height: 50,
-      x: 25,
-      y: 25,
-    });
-    setScale(1);
-  }
-
   return (
     <div className={module.image_cropper}>
       <div className={module.image_cropper__editor}>
-        <input
-          type="range"
-          min={-1}
-          max={10}
-          step={0.1}
-          value={scale}
-          onChange={onScaleChange}
-        />
-
-        <button onClick={resetPosition}>Resetar</button>
-
         <ReactCrop
           crop={crop}
           onChange={onCropChange}
