@@ -17,6 +17,11 @@
   flex-direction: row;
   width: 100%;
   gap: 5px;
+
+  @media (max-width: 590px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 
@@ -51,6 +56,8 @@
   display: flex;
   align-items: center;
   border: 1px solid #2aafdf5c;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .inputURL__submitButton_icon {
