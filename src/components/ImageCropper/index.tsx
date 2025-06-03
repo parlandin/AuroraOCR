@@ -16,6 +16,7 @@ interface ImageCropperProps {
   setCrop: React.Dispatch<React.SetStateAction<Crop>>;
   onCropComplete: (crop: PixelCrop, percentageCrop: PercentCrop) => void;
   imageRef?: React.RefObject<HTMLImageElement | null>;
+  isLoading?: boolean;
 }
 
 export function ImageCropper({
@@ -25,6 +26,7 @@ export function ImageCropper({
   setCrop,
   onCropComplete,
   imageRef,
+  isLoading = false,
 }: ImageCropperProps) {
   function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
     const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
@@ -51,13 +53,17 @@ export function ImageCropper({
   }
 
   return (
-    <div className={module.image_cropper}>
+    <div
+      className={`${module.image_cropper} ${
+        isLoading ? module.image_cropper_loading : ""
+      } `}
+    >
       <div className={module.image_cropper__editor}>
         <ReactCrop
           crop={crop}
           onChange={onCropChange}
           onComplete={onCropComplete}
-          disabled={false}
+          disabled={isLoading}
         >
           <img
             ref={imageRef}

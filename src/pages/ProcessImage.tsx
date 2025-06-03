@@ -6,6 +6,10 @@ import ImageControls from "@components/ImageControls";
 import type { Crop, PixelCrop } from "react-image-crop";
 import { imgPreview } from "@utils/imgGenerateUrl";
 import ConfirmImage from "@components/ConfirmImage";
+import { processImageWithTesseract } from "@utils/tesseract";
+import toast from "react-hot-toast";
+import LoadingComponent from "@components/LoadingComponent";
+import module from "./processImage.module.css";
 
 interface ProcessImagePageProps {
   image?: string | null;
@@ -28,6 +32,8 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [zoomMessage, setZoomMessage] = useState<boolean>(false);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [progress, setProgress] = useState<number>(0);
 
   const imgRef = useRef<HTMLImageElement | null>(null);
 
@@ -57,6 +63,34 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
     setIsCompleted(true);
   };
 
+  const processImage = async () => {
+    if (!previewUrl) {
+      toast.error("Por favor, selecione uma área da imagem.");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const text = await processImageWithTesseract(previewUrl, {
+        language,
+        onProgress: (progress) => {
+          const progressPercentage = Math.round(progress.progress * 100);
+          setProgress(progressPercentage);
+          console.log("Tesseract progress:", progressPercentage);
+        },
+      });
+      toast.success("Texto extraído com sucesso!");
+      console.log("Extracted text:", text);
+      setIsLoading(false);
+      setProgress(0);
+    } catch (error) {
+      console.error("Error processing image:", error);
+      toast.error("Erro ao processar a imagem.");
+      setIsLoading(false);
+      setProgress(0);
+    }
+  };
+
   useEffect(() => {
     if (isCompleted) {
       setZoomMessage(true);
@@ -76,25 +110,29 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
           scale={scale}
           ResetCrop={resetPosition}
         />
-        {image && (
-          <ImageCropper
-            image={image}
-            scale={scale}
-            crop={crop}
-            setCrop={setCrop}
-            onCropComplete={onCropComplete}
-            imageRef={imgRef}
-          />
-        )}
+        <div className={`${module.process_image_edit_image} `}>
+          {image && (
+            <ImageCropper
+              image={image}
+              scale={scale}
+              crop={crop}
+              setCrop={setCrop}
+              onCropComplete={onCropComplete}
+              imageRef={imgRef}
+              isLoading={isLoading}
+            />
+          )}
 
-        <ConfirmImage zoomMessage={zoomMessage} isCompleted={isCompleted} />
-      </Main>
-      {previewUrl && !zoomMessage && (
-        <div className="preview-container">
-          <h2>Preview</h2>
-          <img src={previewUrl} alt="Cropped Preview" />
+          <LoadingComponent isLoading={isLoading} percentage={progress} />
         </div>
-      )}
+
+        <ConfirmImage
+          zoomMessage={zoomMessage}
+          isCompleted={isCompleted}
+          handleClick={processImage}
+          isLoading={isLoading}
+        />
+      </Main>
     </div>
   );
 };
