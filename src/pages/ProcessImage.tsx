@@ -5,12 +5,15 @@ import { ImageCropper } from "@components/ImageCropper";
 import ImageControls from "@components/ImageControls";
 import type { Crop } from "react-image-crop";
 
-interface EditImageProps {
+interface ProcessImagePageProps {
   image?: string | null;
   setImage: (image: string | null) => void;
 }
 
-const EditImage: React.FC<EditImageProps> = ({ image, setImage }) => {
+const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
+  image,
+  setImage,
+}) => {
   const [scale, setScale] = useState<number>(1);
   const [language, setLanguage] = useState<string>("por");
   const [crop, setCrop] = useState<Crop>({
@@ -58,4 +61,4 @@ const EditImage: React.FC<EditImageProps> = ({ image, setImage }) => {
   );
 };
 
-export default EditImage;
+export default ProcessImagePage;

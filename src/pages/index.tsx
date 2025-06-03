@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import UploadFilePage from "./UploadFile";
-import EditImage from "./EditImage";
+import ProcessImagePage from "./ProcessImage";
 
 const IndexPage: React.FC = () => {
   const [image, setImage] = useState<string | null>("");
@@ -16,7 +15,7 @@ const IndexPage: React.FC = () => {
   }, [image]);
 
   if (currentPage === "image") {
-    return <EditImage image={image} setImage={setImage} />;
+    return <ProcessImagePage image={image} setImage={setImage} />;
   }
 
   return <UploadFilePage setImage={setImage} />;
