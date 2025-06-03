@@ -54,7 +54,7 @@ const ImageControls: React.FC<ImageControlsProps> = ({
               value={language}
             >
               {languages.map((lang) => (
-                <option key={lang.code} value={lang.code}>
+                <option key={`${lang.code}-${lang.name}`} value={lang.code}>
                   {lang.name}
                 </option>
               ))}
