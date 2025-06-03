@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Header from "@components/Header";
 import Main from "@components/Main";
 import { ImageCropper } from "@components/ImageCropper";
 import ImageControls from "@components/ImageControls";
-import type { Crop } from "react-image-crop";
+import type { Crop, PixelCrop } from "react-image-crop";
+import { imgPreview } from "@utils/imgGenerateUrl";
+import ConfirmImage from "@components/ConfirmImage";
 
 interface ProcessImagePageProps {
   image?: string | null;
@@ -23,8 +25,13 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
     x: 25,
     y: 25,
   });
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [zoomMessage, setZoomMessage] = useState<boolean>(false);
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
-  function resetPosition() {
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  const resetPosition = () => {
     setCrop({
       unit: "%",
       width: 50,
@@ -33,7 +40,28 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
       y: 25,
     });
     setScale(1);
-  }
+  };
+
+  const onCropComplete = async (crop: PixelCrop) => {
+    console.log("Crop completed:", crop);
+
+    if (!imgRef.current) {
+      console.error("Image reference is not set.");
+      return;
+    }
+
+    const url = await imgPreview(imgRef.current, crop, scale, 0);
+    console.log("Cropped image URL:", url);
+    setPreviewUrl(url);
+    setZoomMessage(false);
+    setIsCompleted(true);
+  };
+
+  useEffect(() => {
+    if (isCompleted) {
+      setZoomMessage(true);
+    }
+  }, [scale]);
 
   return (
     <div>
@@ -54,9 +82,19 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
             scale={scale}
             crop={crop}
             setCrop={setCrop}
+            onCropComplete={onCropComplete}
+            imageRef={imgRef}
           />
         )}
+
+        <ConfirmImage zoomMessage={zoomMessage} isCompleted={isCompleted} />
       </Main>
+      {previewUrl && !zoomMessage && (
+        <div className="preview-container">
+          <h2>Preview</h2>
+          <img src={previewUrl} alt="Cropped Preview" />
+        </div>
+      )}
     </div>
   );
 };
