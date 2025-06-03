@@ -1,7 +1,7 @@
 .header {
   padding: 10px 20px;
   border-bottom: 1px solid #cccccc7d;
-  font-family: "Roboto", sans-serif;  
+  font-family: "Montserrat", sans-serif;  
 }
 
 .header__section {
@@ -41,7 +41,7 @@
 .header__logo_text {
   font-size: 1.3rem;
   color: #57b5ed;
-  font-family: "Roboto", sans-serif;  
+  font-family: "Montserrat", sans-serif;  
   font-weight: 600;
 }
 
@@ -102,7 +102,7 @@
   text-decoration: none;
 
   &:hover {
-    background-color: #45a0d4;
+    background-color: #2aafdf;
   }
 
   @media (max-width: 800px) {
