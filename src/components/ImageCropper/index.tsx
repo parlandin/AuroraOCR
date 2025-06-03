@@ -3,29 +3,19 @@ import ReactCrop, {
   centerCrop,
   makeAspectCrop,
   type Crop,
+  type PercentCrop,
   type PixelCrop,
 } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import module from "./imageCropper.module.css";
-
-/* interface ImageCropperProps {
-  image: string;
-  crop: Crop;
-  scale: number;
-  onCropChange: (crop: Crop) => void;
-  onCropComplete: (crop: PixelCrop) => void;
-  onImageLoad: (e: React.SyntheticEvent<HTMLImageElement>) => void;
-  isProcessing: boolean;
-  onTouchStart: (e: React.TouchEvent<HTMLDivElement>) => void;
-  onTouchMove: (e: React.TouchEvent<HTMLDivElement>) => void;
-  imgRef: RefObject<HTMLImageElement | null>;
-} */
 
 interface ImageCropperProps {
   image: string;
   scale?: number;
   crop: Crop;
   setCrop: React.Dispatch<React.SetStateAction<Crop>>;
+  onCropComplete: (crop: PixelCrop, percentageCrop: PercentCrop) => void;
+  imageRef?: React.RefObject<HTMLImageElement | null>;
 }
 
 export function ImageCropper({
@@ -33,6 +23,8 @@ export function ImageCropper({
   scale,
   crop,
   setCrop,
+  onCropComplete,
+  imageRef,
 }: ImageCropperProps) {
   function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
     const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
@@ -64,10 +56,11 @@ export function ImageCropper({
         <ReactCrop
           crop={crop}
           onChange={onCropChange}
-          /* onComplete={onCropComplete} */
+          onComplete={onCropComplete}
           disabled={false}
         >
           <img
+            ref={imageRef}
             src={image}
             onLoad={onImageLoad}
             alt="Imagem para edição"
