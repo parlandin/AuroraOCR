@@ -1,7 +1,7 @@
 import module from "./header.module.css";
 import { Heart } from "lucide-react";
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <header className={module.header}>
       <section className={module.header__section}>
