@@ -1,6 +1,7 @@
 import module from "./inputURL.module.css";
 import React, { useState } from "react";
 import { Link } from "lucide-react";
+import { validateURL } from "@utils/validateInput";
 
 export interface InputURLProps {
   setImage?: (image: string | null) => void;
@@ -14,6 +15,12 @@ const InputURL: React.FC<InputURLProps> = ({ setImage }) => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+
+    const isValidURL = validateURL(url);
+    if (!isValidURL) {
+      return;
+    }
+
     if (setImage && url) {
       setImage(url);
       setUrl("");
@@ -35,6 +42,8 @@ const InputURL: React.FC<InputURLProps> = ({ setImage }) => {
           type="submit"
           className={module.inputURL__submitButton}
           onClick={handleSubmit}
+          disabled={!url.trim()}
+          title="Carregar URL"
         >
           Carregar URL
           <Link size={17} className={module.inputURL__submitButton_icon} />
