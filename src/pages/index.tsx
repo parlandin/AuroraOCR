@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Header from "@components/Header";
-import Main from "@components/Main";
-import InputDropzone from "@components/InputDropzone";
-import InputURL from "@components/InputURL";
+
+import UploadFilePage from "./UploadFile";
+import EditImage from "./EditImage";
 
 const IndexPage: React.FC = () => {
-  const [image, setImage] = useState<string | null>(null);
+  const [image, setImage] = useState<string | null>("");
   const [currentPage, setCurrentPage] = useState<string>("index");
 
   useEffect(() => {
@@ -17,26 +16,10 @@ const IndexPage: React.FC = () => {
   }, [image]);
 
   if (currentPage === "image") {
-    return (
-      <div>
-        <Header />
-        <Main>
-          <p>Image uploaded successfully!</p>
-          <img src={image ?? undefined} alt="Uploaded" />
-        </Main>
-      </div>
-    );
+    return <EditImage image={image} setImage={setImage} />;
   }
 
-  return (
-    <div>
-      <Header />
-      <Main>
-        <InputDropzone setImage={setImage} />
-        <InputURL setImage={setImage} />
-      </Main>
-    </div>
-  );
+  return <UploadFilePage setImage={setImage} />;
 };
 
 export default IndexPage;
