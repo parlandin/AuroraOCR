@@ -2,6 +2,7 @@ import module from "./inputURL.module.css";
 import React, { useState } from "react";
 import { Link } from "lucide-react";
 import { validateURL } from "@utils/validateInput";
+import toast from "react-hot-toast";
 
 export interface InputURLProps {
   setImage?: (image: string | null) => void;
@@ -18,6 +19,8 @@ const InputURL: React.FC<InputURLProps> = ({ setImage }) => {
 
     const isValidURL = validateURL(url);
     if (!isValidURL) {
+      toast.error("URL inválida. Por favor, insira uma URL válida.");
+      setUrl("");
       return;
     }
 
