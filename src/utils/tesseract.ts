@@ -12,6 +12,8 @@ export interface TesseractOptions {
   onProgress?: (progress: TesseractProgress) => void;
 }
 
+//https://tessdata.projectnaptha.com/4.0.0
+
 export async function processImageWithTesseract(
   image: string,
   options: TesseractOptions
