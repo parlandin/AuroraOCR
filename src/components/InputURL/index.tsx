@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link } from "lucide-react";
 import { validateURL } from "@utils/validateInput";
 import toast from "react-hot-toast";
+import { imageLinkToBlobLink } from "@utils/imageToLinkBlob";
 
 export interface InputURLProps {
   setImage?: (image: string | null) => void;
@@ -14,7 +15,7 @@ const InputURL: React.FC<InputURLProps> = ({ setImage }) => {
     setUrl(event.target.value);
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const isValidURL = validateURL(url);
@@ -25,7 +26,16 @@ const InputURL: React.FC<InputURLProps> = ({ setImage }) => {
     }
 
     if (setImage && url) {
-      setImage(url);
+      const blobUrl = await imageLinkToBlobLink(url);
+
+      if (!blobUrl) {
+        toast.error(
+          "Erro ao carregar a imagem. Verifique a URL e tente novamente."
+        );
+        setUrl("");
+        return;
+      }
+      setImage(blobUrl);
       setUrl("");
     }
   };
