@@ -10,6 +10,7 @@ import { processImageWithTesseract } from "@utils/tesseract";
 import toast from "react-hot-toast";
 import LoadingComponent from "@components/LoadingComponent";
 import module from "./processImage.module.css";
+import ShowText from "@components/ShowText";
 
 interface ProcessImagePageProps {
   image?: string | null;
@@ -34,8 +35,10 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
+  const [text, setText] = useState<string>("");
 
   const imgRef = useRef<HTMLImageElement | null>(null);
+  const textResultRef = useRef<HTMLDivElement | null>(null);
 
   const resetPosition = () => {
     setCrop({
@@ -71,6 +74,8 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
 
     try {
       setIsLoading(true);
+      setText("");
+
       const text = await processImageWithTesseract(previewUrl, {
         language,
         onProgress: (progress) => {
@@ -79,8 +84,11 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
           console.log("Tesseract progress:", progressPercentage);
         },
       });
+
       toast.success("Texto extraído com sucesso!");
       console.log("Extracted text:", text);
+
+      setText(text);
       setIsLoading(false);
       setProgress(0);
     } catch (error) {
@@ -88,6 +96,7 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
       toast.error("Erro ao processar a imagem.");
       setIsLoading(false);
       setProgress(0);
+      setText("");
     }
   };
 
@@ -96,6 +105,12 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
       setZoomMessage(true);
     }
   }, [scale]);
+
+  useEffect(() => {
+    if (text && textResultRef.current) {
+      textResultRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [text]);
 
   return (
     <div>
@@ -133,6 +148,7 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
           isLoading={isLoading}
         />
       </Main>
+      {text && <ShowText text={text} reference={textResultRef} />}
     </div>
   );
 };
