@@ -14,8 +14,8 @@ export default defineConfig({
       },
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
       manifest: {
-        name: "Imagem para Texto",
-        short_name: "Img2Text",
+        name: "AuraOCR - Imagem para Texto",
+        short_name: "AuraOCR",
         description: "Extraia texto de imagens facilmente",
         theme_color: "#ffffff",
         background_color: "#ffffff",
@@ -25,17 +25,17 @@ export default defineConfig({
         start_url: "/",
         icons: [
           {
-            src: "pwa-192x192.png",
+            src: "app-icon.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "pwa-512x512.png",
+            src: "app-icon.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "pwa-512x512.png",
+            src: "app-icon.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
