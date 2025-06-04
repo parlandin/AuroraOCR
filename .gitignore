@@ -3,3 +3,4 @@ design
 .env
 *.env
 dev-dist
+dist
