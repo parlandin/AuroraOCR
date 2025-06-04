@@ -4,11 +4,13 @@ import React from "react";
 export interface LoadingComponentProps {
   isLoading: boolean;
   percentage?: number;
+  percentageNumberShow?: boolean;
 }
 
 const LoadingComponent: React.FC<LoadingComponentProps> = ({
   isLoading,
   percentage,
+  percentageNumberShow = false,
 }) => {
   if (!isLoading) return null;
 
@@ -35,9 +37,11 @@ const LoadingComponent: React.FC<LoadingComponentProps> = ({
               style={progressStyle}
             ></div>
           </div>
-          <div className={styles.loading__progress_text}>
-            {Math.round(percentage)}%
-          </div>
+          {percentageNumberShow && (
+            <div className={styles.loading__progress_number}>
+              {Math.round(percentage)}%
+            </div>
+          )}
         </div>
       )}
     </div>
