@@ -12,6 +12,7 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
+
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
       manifest: {
         name: "AuraOCR - Imagem para Texto",
@@ -43,7 +44,12 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
+        skipWaiting: true,
+        clientsClaim: true,
+        globPatterns: [
+          "**/*.{js,css,html,ico,png,svg,woff2,jpg,jpeg,gif,json, traineddata.gz}",
+        ],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

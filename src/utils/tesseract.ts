@@ -27,10 +27,10 @@ export async function processImageWithTesseract(
     },
     workerPath,
     corePath,
+    langPath: "/tessdata",
   });
 
   try {
-    await worker.load();
     await worker.loadLanguage(options.language);
     await worker.initialize(options.language);
 
@@ -42,4 +42,4 @@ export async function processImageWithTesseract(
   } finally {
     await worker.terminate();
   }
-} 
+}
