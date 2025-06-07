@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import Header from "@components/Header";
 import Main from "@components/Main";
 import { ImageCropper } from "@components/ImageCropper";
 import ImageControls from "@components/ImageControls";
@@ -113,9 +112,7 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
   }, [text]);
 
   return (
-    <div>
-      <Header />
-
+    <>
       <Main>
         <ImageControls
           onCleanImage={() => setImage(null)}
@@ -149,7 +146,7 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
         />
       </Main>
       {text && <ShowText text={text} reference={textResultRef} />}
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import UploadFilePage from "./UploadFile";
 import ProcessImagePage from "./ProcessImage";
+import Header from "@components/Header";
+import Resources from "@components/Resources";
+import FAQ from "@components/FAQ";
 
 const IndexPage: React.FC = () => {
   const [image, setImage] = useState<string | null>("");
@@ -14,11 +17,22 @@ const IndexPage: React.FC = () => {
     }
   }, [image]);
 
-  if (currentPage === "image") {
-    return <ProcessImagePage image={image} setImage={setImage} />;
-  }
+  return (
+    <>
+      <Header />
 
-  return <UploadFilePage setImage={setImage} />;
+      <>
+        {currentPage === "image" ? (
+          <ProcessImagePage image={image} setImage={setImage} />
+        ) : (
+          <UploadFilePage setImage={setImage} />
+        )}
+      </>
+
+      <Resources />
+      <FAQ />
+    </>
+  );
 };
 
 export default IndexPage;
