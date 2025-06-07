@@ -26,9 +26,13 @@ const ShowText: React.FC<ShowTextProps> = ({ text, reference }) => {
   }, [text]);
 
   const processTextWithLinks = useCallback((text: string) => {
-    return Autolinker.link(text, {
+    const secureText = text.replace(/http:\/\//g, "https://");
+
+    const newText = Autolinker.link(secureText, {
       className: module.show_text__content_link,
     });
+
+    return newText;
   }, []);
 
   const linkedText = useMemo(
