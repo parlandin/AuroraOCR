@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import module from "./imageControls.module.css";
 import { languages } from "./languages";
 import { Globe, ZoomOut, ZoomIn, RotateCcw } from "lucide-react";
@@ -20,18 +20,31 @@ const ImageControls: React.FC<ImageControlsProps> = ({
   language,
   ResetCrop,
 }) => {
-  const addScale = () => {
+  const addScale = useCallback(() => {
     onScaleChange((prev) => prev + 0.1);
-  };
+  }, [onScaleChange]);
 
-  const subtractScale = () => {
+  const subtractScale = useCallback(() => {
     onScaleChange((prev) => prev - 0.1);
-  };
+  }, [onScaleChange]);
 
-  const handleScaleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newScale = parseFloat(event.target.value);
-    onScaleChange(newScale);
-  };
+  const handleScaleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newScale = parseFloat(event.target.value);
+      onScaleChange(newScale);
+    },
+    [onScaleChange]
+  );
+
+  const languageOptions = useMemo(
+    () =>
+      languages.map((lang) => (
+        <option key={`${lang.code}-${lang.name}`} value={lang.code}>
+          {lang.name}
+        </option>
+      )),
+    []
+  );
 
   return (
     <div className={module.image_controls}>
@@ -53,11 +66,7 @@ const ImageControls: React.FC<ImageControlsProps> = ({
               onChange={(e) => onLanguageChange(e.target.value)}
               value={language}
             >
-              {languages.map((lang) => (
-                <option key={`${lang.code}-${lang.name}`} value={lang.code}>
-                  {lang.name}
-                </option>
-              ))}
+              {languageOptions}
             </select>
           </div>
 
@@ -113,4 +122,4 @@ const ImageControls: React.FC<ImageControlsProps> = ({
   );
 };
 
-export default ImageControls;
+export default React.memo(ImageControls);

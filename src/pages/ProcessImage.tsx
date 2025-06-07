@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import Main from "@components/Main";
 import { ImageCropper } from "@components/ImageCropper";
 import ImageControls from "@components/ImageControls";
@@ -39,7 +45,7 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
   const imgRef = useRef<HTMLImageElement | null>(null);
   const textResultRef = useRef<HTMLDivElement | null>(null);
 
-  const resetPosition = () => {
+  const resetPosition = useCallback(() => {
     setCrop({
       unit: "%",
       width: 50,
@@ -48,24 +54,27 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
       y: 25,
     });
     setScale(1);
-  };
+  }, []);
 
-  const onCropComplete = async (crop: PixelCrop) => {
-    console.log("Crop completed:", crop);
+  const onCropComplete = useCallback(
+    async (crop: PixelCrop) => {
+      console.log("Crop completed:", crop);
 
-    if (!imgRef.current) {
-      console.error("Image reference is not set.");
-      return;
-    }
+      if (!imgRef.current) {
+        console.error("Image reference is not set.");
+        return;
+      }
 
-    const url = await imgPreview(imgRef.current, crop, scale, 0);
-    console.log("Cropped image URL:", url);
-    setPreviewUrl(url);
-    setZoomMessage(false);
-    setIsCompleted(true);
-  };
+      const url = await imgPreview(imgRef.current, crop, scale, 0);
+      console.log("Cropped image URL:", url);
+      setPreviewUrl(url);
+      setZoomMessage(false);
+      setIsCompleted(true);
+    },
+    [imgRef, scale, setPreviewUrl, setZoomMessage, setIsCompleted]
+  );
 
-  const processImage = async () => {
+  const processImage = useCallback(async () => {
     if (!previewUrl) {
       toast.error("Por favor, selecione uma área da imagem.");
       return;
@@ -97,7 +106,37 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
       setProgress(0);
       setText("");
     }
-  };
+  }, [previewUrl, language, setIsLoading, setText, setProgress]);
+
+  const imageControlsComponent = useMemo(
+    () => (
+      <ImageControls
+        onCleanImage={() => setImage(null)}
+        onScaleChange={setScale}
+        onLanguageChange={setLanguage}
+        language={language}
+        scale={scale}
+        ResetCrop={resetPosition}
+      />
+    ),
+    [language, scale, resetPosition, setImage, setScale, setLanguage]
+  );
+
+  const imageCropperComponent = useMemo(
+    () =>
+      image && (
+        <ImageCropper
+          image={image}
+          scale={scale}
+          crop={crop}
+          setCrop={setCrop}
+          onCropComplete={onCropComplete}
+          imageRef={imgRef}
+          isLoading={isLoading}
+        />
+      ),
+    [image, scale, crop, setCrop, onCropComplete, imgRef, isLoading]
+  );
 
   useEffect(() => {
     if (isCompleted) {
@@ -117,26 +156,9 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
   return (
     <>
       <Main>
-        <ImageControls
-          onCleanImage={() => setImage(null)}
-          onScaleChange={setScale}
-          onLanguageChange={setLanguage}
-          language={language}
-          scale={scale}
-          ResetCrop={resetPosition}
-        />
+        {imageControlsComponent}
         <div className={`${module.process_image_edit_image} `}>
-          {image && (
-            <ImageCropper
-              image={image}
-              scale={scale}
-              crop={crop}
-              setCrop={setCrop}
-              onCropComplete={onCropComplete}
-              imageRef={imgRef}
-              isLoading={isLoading}
-            />
-          )}
+          {imageCropperComponent}
 
           <LoadingComponent isLoading={isLoading} percentage={progress} />
         </div>

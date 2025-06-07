@@ -1,5 +1,5 @@
+import React, { useEffect, useCallback } from "react";
 import module from "./inputDropzone.module.css";
-import React, { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { Upload, Image as ImageIcon } from "lucide-react";
 
@@ -8,39 +8,45 @@ export interface InputDropzoneProps {
 }
 
 const InputDropzone: React.FC<InputDropzoneProps> = ({ setImage }) => {
-  const onDrop = (acceptedFiles: File[]) => {
-    if (acceptedFiles.length > 0) {
-      const file = acceptedFiles[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (setImage) {
-          setImage(reader.result as string);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handlePaste = (event: ClipboardEvent) => {
-    const items = event.clipboardData?.items;
-
-    if (items) {
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].type.indexOf("image") !== -1) {
-          const file = items[i].getAsFile();
-
-          if (file && setImage) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-              setImage(reader.result as string);
-            };
-            reader.readAsDataURL(file);
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      if (acceptedFiles.length > 0) {
+        const file = acceptedFiles[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          if (setImage) {
+            setImage(reader.result as string);
           }
-          break;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    [setImage]
+  );
+
+  const handlePaste = useCallback(
+    (event: ClipboardEvent) => {
+      const items = event.clipboardData?.items;
+
+      if (items) {
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].type.indexOf("image") !== -1) {
+            const file = items[i].getAsFile();
+
+            if (file && setImage) {
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                setImage(reader.result as string);
+              };
+              reader.readAsDataURL(file);
+            }
+            break;
+          }
         }
       }
-    }
-  };
+    },
+    [setImage]
+  );
 
   useEffect(() => {
     window.addEventListener("paste", handlePaste);
@@ -48,7 +54,7 @@ const InputDropzone: React.FC<InputDropzoneProps> = ({ setImage }) => {
     return () => {
       window.removeEventListener("paste", handlePaste);
     };
-  }, [setImage]);
+  }, [handlePaste]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

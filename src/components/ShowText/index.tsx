@@ -1,6 +1,6 @@
+import React, { useState, useCallback, useMemo } from "react";
 import { Copy, CopyCheck } from "lucide-react";
 import module from "./showText.module.css";
-import React, { useState } from "react";
 import Autolinker from "autolinker";
 import SectionContainer from "@components/SectionContainer";
 
@@ -12,7 +12,7 @@ interface ShowTextProps {
 const ShowText: React.FC<ShowTextProps> = ({ text, reference }) => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
+  const handleCopy = useCallback(() => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
@@ -23,15 +23,18 @@ const ShowText: React.FC<ShowTextProps> = ({ text, reference }) => {
       .catch((err) => {
         console.error("Falha ao copiar texto:", err);
       });
-  };
+  }, [text]);
 
-  const processTextWithLinks = (text: string) => {
-    const linkedText = Autolinker.link(text, {
+  const processTextWithLinks = useCallback((text: string) => {
+    return Autolinker.link(text, {
       className: module.show_text__content_link,
     });
+  }, []);
 
-    return linkedText;
-  };
+  const linkedText = useMemo(
+    () => processTextWithLinks(text),
+    [text, processTextWithLinks]
+  );
 
   return (
     <SectionContainer id="texto-reconhecido" ref={reference}>
@@ -58,11 +61,11 @@ const ShowText: React.FC<ShowTextProps> = ({ text, reference }) => {
       <div className={module.show_text__content}>
         <p
           className={module.show_text__content_text}
-          dangerouslySetInnerHTML={{ __html: processTextWithLinks(text) }}
+          dangerouslySetInnerHTML={{ __html: linkedText }}
         ></p>
       </div>
     </SectionContainer>
   );
 };
 
-export default ShowText;
+export default React.memo(ShowText);
