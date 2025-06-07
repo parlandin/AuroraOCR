@@ -22,6 +22,11 @@ const FAQ: React.FC = () => {
         "Suportamos os formatos mais comuns, incluindo JPEG, PNG, GIF e PDF.",
     },
     {
+      question: "Posso extrair links de imagens?",
+      answer:
+        "Sim, nosso serviço extrair links de imagens, permitindo que você obtenha links clicáveis diretamente do texto extraído. Além disso, destacamos também: email, números de telefone e mais.",
+    },
+    {
       question: "É necessário criar uma conta para usar o serviço?",
       answer:
         "Não, você pode usar nosso serviço sem criar uma conta. Basta fazer o upload da imagem e obter o texto extraído.",
