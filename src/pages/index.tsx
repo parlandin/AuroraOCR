@@ -4,6 +4,7 @@ import ProcessImagePage from "./ProcessImage";
 import Header from "@components/Header";
 import Resources from "@components/Resources";
 import FAQ from "@components/FAQ";
+import Footer from "@components/Footer";
 
 const IndexPage: React.FC = () => {
   const [image, setImage] = useState<string | null>("");
@@ -31,6 +32,7 @@ const IndexPage: React.FC = () => {
 
       <Resources />
       <FAQ />
+      <Footer />
     </>
   );
 };
