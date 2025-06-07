@@ -24,12 +24,6 @@ const Header: React.FC = () => {
             </li>
 
             <li className={module.header__nav_item}>
-              <a className={module.header__nav_link} href="/sobre">
-                Sobre
-              </a>
-            </li>
-
-            <li className={module.header__nav_item}>
               <a className={module.header__nav_link} href="/faq">
                 FAQ
               </a>

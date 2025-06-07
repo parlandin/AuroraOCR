@@ -17,7 +17,7 @@ const ShowText: React.FC<ShowTextProps> = ({ text, reference }) => {
       .then(() => {
         setCopied(true);
 
-        setTimeout(() => setCopied(false), 2000);
+        setTimeout(() => setCopied(false), 3000);
       })
       .catch((err) => {
         console.error("Falha ao copiar texto:", err);
