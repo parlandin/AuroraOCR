@@ -73,6 +73,11 @@ const FAQ: React.FC = () => {
       answer:
         "Sim, todas as imagens são processadas localmente no seu navegador, garantindo que sua privacidade seja mantida e que nenhuma imagem seja enviada para servidores externos.",
     },
+    {
+      question: "Qual o software utilizado para o OCR?",
+      answer:
+        "Utilizamos o Tesseract.js, uma biblioteca de OCR baseada em JavaScript, que permite o reconhecimento de texto diretamente no navegador.",
+    },
   ];
 
   return (
