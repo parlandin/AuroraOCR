@@ -105,12 +105,14 @@ menu,
 nav,
 section {
 	display: block;
+	scroll-behavior: smooth;
 }
 
 body {
 	line-height: 1;
 	font-family: "Montserrat", sans-serif;
 	background: #f0f0f0;
+	scroll-behavior: smooth;
 }
 
 ol,
