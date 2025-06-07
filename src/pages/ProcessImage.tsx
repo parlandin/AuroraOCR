@@ -58,15 +58,13 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
 
   const onCropComplete = useCallback(
     async (crop: PixelCrop) => {
-      console.log("Crop completed:", crop);
-
       if (!imgRef.current) {
         console.error("Image reference is not set.");
         return;
       }
 
       const url = await imgPreview(imgRef.current, crop, scale, 0);
-      console.log("Cropped image URL:", url);
+
       setPreviewUrl(url);
       setZoomMessage(false);
       setIsCompleted(true);
@@ -89,12 +87,10 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
         onProgress: (progress) => {
           const progressPercentage = Math.round(progress.progress * 100);
           setProgress(progressPercentage);
-          console.log("Tesseract progress:", progressPercentage);
         },
       });
 
       toast.success("Texto extraído com sucesso!");
-      console.log("Extracted text:", text);
 
       setText(text);
       setIsLoading(false);

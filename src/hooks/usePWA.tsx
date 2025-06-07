@@ -23,7 +23,7 @@ export function usePWA() {
 
   const installPWA = async () => {
     if (!deferredPrompt) {
-      console.log("PWA já instalado ou não suportado");
+      toast.error("PWA não está disponível para instalação.");
       return;
     }
 
