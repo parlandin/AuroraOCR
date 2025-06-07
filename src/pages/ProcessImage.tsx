@@ -107,7 +107,10 @@ const ProcessImagePage: React.FC<ProcessImagePageProps> = ({
 
   useEffect(() => {
     if (text && textResultRef.current) {
-      textResultRef.current.scrollIntoView({ behavior: "smooth" });
+      textResultRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }
   }, [text]);
 

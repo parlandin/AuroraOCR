@@ -34,8 +34,8 @@ const ShowText: React.FC<ShowTextProps> = ({ text, reference }) => {
   };
 
   return (
-    <SectionContainer id="texto-reconhecido">
-      <section className={module.show_text__header}>
+    <SectionContainer id="texto-reconhecido" ref={reference}>
+      <div className={module.show_text__header}>
         <h2 className={module.show_text__header_title}>Texto Reconhecido</h2>
         <button
           className={module.show_text__header_button}
@@ -53,9 +53,9 @@ const ShowText: React.FC<ShowTextProps> = ({ text, reference }) => {
             </>
           )}
         </button>
-      </section>
+      </div>
 
-      <div className={module.show_text__content} ref={reference}>
+      <div className={module.show_text__content}>
         <p
           className={module.show_text__content_text}
           dangerouslySetInnerHTML={{ __html: processTextWithLinks(text) }}
