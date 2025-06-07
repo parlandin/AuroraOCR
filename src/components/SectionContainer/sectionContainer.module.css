@@ -8,6 +8,10 @@
   padding: 0 20px;
   box-sizing: border-box;
   margin: 40px auto;
+
+  @media (max-width: 768px) {
+    padding: 0 9px;
+  }
 }
 
 .section_container__wrapper {

@@ -42,6 +42,10 @@
   transform: translateZ(0) scale(0.8);
   backface-visibility: hidden;
   transform-origin: 0 0;
+
+  @media (max-width: 768px) {
+    transform: translateZ(0) scale(0.5);
+  }
 }
 
 .loading__spinner_magnify {

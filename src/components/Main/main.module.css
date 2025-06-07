@@ -1,14 +1,17 @@
-
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: calc(100vh - 65px); 
+  min-height: calc(100vh - 65px);
   padding: 20px;
   box-sizing: border-box;
   background-color: #f0f0f0;
+
+  @media (max-width: 768px) {
+    padding: 10px 9px;
+  }
 }
 
 .main__content {
@@ -21,6 +24,7 @@
   margin: 0 10px;
   box-sizing: border-box;
 }
+
 .main__title {
   font-size: 2rem;
   font-weight: bold;
@@ -30,6 +34,7 @@
   margin-top: 40px;
   color: #57b5ed;
 }
+
 .main__text {
   font-size: 1.2rem;
   color: #666;
@@ -46,6 +51,6 @@
   gap: 20px;
   width: 100%;
   height: 100%;
-  
+
 
 }
