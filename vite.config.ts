@@ -15,8 +15,8 @@ export default defineConfig({
 
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
       manifest: {
-        name: "AuraOCR - Imagem para Texto",
-        short_name: "AuraOCR",
+        name: "AuroraOCR - Imagem para Texto",
+        short_name: "AuroraOCR",
         description: "Extraia texto de imagens facilmente",
         theme_color: "#ffffff",
         background_color: "#ffffff",

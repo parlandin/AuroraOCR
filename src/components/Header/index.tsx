@@ -15,7 +15,7 @@ const Header: React.FC = () => {
             alt="Logo"
           />
 
-          <p className={module.header__logo_text}>AuraOCR</p>
+          <p className={module.header__logo_text}>AuroraOCR</p>
         </div>
 
         <nav className={module.header__nav}>
