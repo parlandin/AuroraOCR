@@ -118,3 +118,11 @@
 .header__nav_button_icon {
   margin-left: 5px;
 }
+
+.header__nav_button_install {
+  background-color: #273137;
+
+  &:hover {
+    background-color: #4a4d4f;
+  }
+}
