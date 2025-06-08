@@ -8,7 +8,7 @@ export function usePWA() {
 
   useEffect(() => {
     const handler = (e: Event) => {
-      e.preventDefault();
+      /*  e.preventDefault(); */
 
       setDeferredPrompt(e);
       setIsInstallable(true);
