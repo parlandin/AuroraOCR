@@ -5,6 +5,7 @@ import Header from "@components/Header";
 import Resources from "@components/Resources";
 import FAQ from "@components/FAQ";
 import Footer from "@components/Footer";
+import SponsoredContent from "@components/Sponsored";
 
 const IndexPage: React.FC = () => {
   const [image, setImage] = useState<string | null>("");
@@ -21,6 +22,7 @@ const IndexPage: React.FC = () => {
   return (
     <>
       <Header />
+      <SponsoredContent />
 
       <>
         {currentPage === "image" ? (

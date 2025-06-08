@@ -1,0 +1,53 @@
+.ads {
+  margin: 20px auto;
+  max-width: 1566px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.ads__container {
+  width: 100%;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  max-height: 100px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ads__content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ads__alternative {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #cccccc7d;
+  border-radius: 5px;
+  text-align: center;
+  color: #273137;
+}
+
+.ads__alternative_text {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.ads__alternative_message {
+  margin: 10px 0;
+  font-size: 0.8rem;
+  color: #57b5ed;
+}
+
+@media (max-width: 800px) {
+  .ads__alternative_text {
+    font-size: 0.8rem;
+  }
+
+  .ads__alternative_message {
+    font-size: 0.75rem;
+  }
+}
