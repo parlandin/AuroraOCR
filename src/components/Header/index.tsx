@@ -17,6 +17,17 @@ const Header: React.FC = () => {
     setMenuOpen(false);
   }, []);
 
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 835) {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const navigationItems = useMemo(
     () => (
       <ul className={module.header__nav_list}>
