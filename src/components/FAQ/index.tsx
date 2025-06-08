@@ -19,7 +19,7 @@ const FAQ: React.FC = () => {
     {
       question: "Quais formatos de imagem são suportados?",
       answer:
-        "Suportamos os formatos mais comuns, incluindo JPEG, PNG, GIF e PDF.",
+        "Suportamos os formatos mais comuns, incluindo JPEG, PNG, GIF e WEBP.",
     },
     {
       question: "Posso extrair links de imagens?",
