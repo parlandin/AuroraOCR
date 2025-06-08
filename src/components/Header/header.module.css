@@ -49,6 +49,10 @@
 .header__nav {
   display: flex;
   gap: 20px;
+
+  @media (max-width: 835px) {
+    display: none;
+  }
 }
 
 .header__nav_list {
@@ -124,5 +128,16 @@
 
   &:hover {
     background-color: #4a4d4f;
+  }
+}
+
+.header__menu_mobile {
+  background: #57b5ed;
+
+  & .bm-burger-button button {
+    position: initial;
+    width: 36px;
+    height: 30px;
+    border: 1px solid #de0101;
   }
 }

@@ -2,13 +2,20 @@ import React, { useMemo, useCallback } from "react";
 import module from "./header.module.css";
 import { Heart, Smartphone } from "lucide-react";
 import { usePWA } from "@hooks/usePWA";
+import Hamburger from "@components/hamburger";
+import MenuMobile from "@components/MenuMobile";
 
 const Header: React.FC = () => {
   const { isInstallable, installPWA } = usePWA();
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
   const handleInstallClick = useCallback(() => {
     installPWA();
   }, [installPWA]);
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+  }, []);
 
   const navigationItems = useMemo(
     () => (
@@ -81,6 +88,8 @@ const Header: React.FC = () => {
       <section className={module.header__section}>
         {logoSection}
         <nav className={module.header__nav}>{navigationItems}</nav>
+        <Hamburger isOpen={menuOpen} onClick={() => setMenuOpen(!menuOpen)} />
+        <MenuMobile isOpen={menuOpen} closeMenu={closeMenu} />
       </section>
     </header>
   );
