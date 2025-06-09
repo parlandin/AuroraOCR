@@ -44,10 +44,12 @@ const SponsoredContent: React.FC = () => {
         {isAdBlocked && (
           <div className={module.ads__alternative}>
             <p className={module.ads__alternative_text}>
-              Parece que você está usando um bloqueador de anúncios.
+              {/* Parece que você está usando um bloqueador de anúncios. */}
+              Aqui vai um anúncio patrocinado.
             </p>
             <p className={module.ads__alternative_message}>
-              Por favor, considere desativar o bloqueador para este site.
+              {/* Por favor, considere desativar o bloqueador para este site. */}
+              Considere apoiar nosso site de outras formas.
             </p>
           </div>
         )}
