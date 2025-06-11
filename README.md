@@ -13,7 +13,7 @@ AuroraOCR é uma ferramenta online gratuita para converter imagens em texto util
 
 ## 🖼️ Capturas de Tela
 
-![captura](./src/assets/preview.png)
+![captura]("./public/preview.png")
 
 
 
