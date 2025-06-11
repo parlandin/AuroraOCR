@@ -1,54 +1,75 @@
-# React + TypeScript + Vite
+# AuroraOCR
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AuroraOCR é uma ferramenta online gratuita para converter imagens em texto utilizando tecnologia OCR (Reconhecimento Óptico de Caracteres). Com suporte a múltiplos idiomas, incluindo português e inglês, o AuroraOCR é rápido, seguro e fácil de usar, sem necessidade de cadastro ou limites de uso.
 
-Currently, two official plugins are available:
+## 🚀 Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Conversão de Imagens em Texto**: Extraia texto de imagens diretamente no navegador.
+- **Privacidade Garantida**: Todo o processamento é feito localmente no navegador, sem envio de imagens para servidores externos.
+- **Gratuito e Ilimitado**: Use a ferramenta sem custos adicionais ou limites de uso.
+- **Suporte a Múltiplos Idiomas**: Reconhece texto em diversos idiomas, como português, inglês, entre outros.
+- **Progressive Web App (PWA)**: Instale o AuroraOCR como um aplicativo no seu dispositivo para uma experiência mais integrada.
+- **Interface Responsiva**: Totalmente otimizado para dispositivos móveis e desktops.
 
-## Expanding the ESLint configuration
+## 🖼️ Capturas de Tela
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+![captura](./src/assets/preview.png)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ Tecnologias Utilizadas
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- **Frontend**: React.js
+- **OCR**: [Tesseract.js](https://github.com/naptha/tesseract.js)
+- **Estilização**: CSS Modules
+- **Build Tool**: Vite
+- **PWA**: Vite Plugin PWA
+
+
+
+## 📦 Instalação e Configuração
+
+### Pré-requisitos
+
+- Node.js (versão 16 ou superior)
+- Gerenciador de pacotes npm ou yarn
+
+### Passos para Instalação
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/seu-usuario/AuroraOCR.git
+   cd AuroraOCR
+   ```
+
+2. Instale as dependências:
+
+   ```bash
+   npm install
+   # ou
+   yarn install
+   ```
+
+3. Inicie o servidor de desenvolvimento:
+
+   ```bash
+   npm run dev
+   # ou
+   yarn dev
+   ```
+
+4. Acesse o AuroraOCR no seu navegador:
+
+   ```
+   http://localhost:5173/
+   ```
+Build para Produção
+Para gerar os arquivos otimizados para produção, execute:
+
+Os arquivos gerados estarão na pasta `dist/`.
+
+## URLs Importantes
+- Site Oficial: https://aurora-app.com.br
+- Política de Privacidade: https://aurora-app.com.br/privacidade.html
+- Termos de Uso: https://aurora-app.com.br/termos.html
