@@ -1,34 +1,42 @@
 import React, { useEffect, useRef, useState } from "react";
 import module from "./sponsored.module.css";
 
+declare global {
+  interface Window {
+    adsbygoogle: unknown[];
+  }
+}
+
 const SponsoredContent: React.FC = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [isAdBlocked, setIsAdBlocked] = useState(false);
 
   useEffect(() => {
     if (contentRef.current) {
-      const ampAd = document.createElement("amp-ad");
-      ampAd.setAttribute("width", "100vw");
-      ampAd.setAttribute("height", "320");
-      ampAd.setAttribute("type", "adsense");
-      ampAd.setAttribute("data-ad-client", "ca-pub-3126913255092932");
-      ampAd.setAttribute("data-ad-slot", "8403750929");
-      ampAd.setAttribute("data-auto-format", "rspv");
-      ampAd.setAttribute("data-full-width", "");
-
-      const overflowDiv = document.createElement("div");
-      overflowDiv.setAttribute("overflow", "");
-      ampAd.appendChild(overflowDiv);
+      const adsenseIns = document.createElement("ins");
+      adsenseIns.className = "adsbygoogle";
+      adsenseIns.style.display = "block";
+      adsenseIns.setAttribute("data-ad-client", "ca-pub-3126913255092932");
+      adsenseIns.setAttribute("data-ad-slot", "8403750929");
+      adsenseIns.setAttribute("data-ad-format", "auto");
+      adsenseIns.setAttribute("data-full-width-responsive", "true");
 
       contentRef.current.innerHTML = "";
-      contentRef.current.appendChild(ampAd);
+      contentRef.current.appendChild(adsenseIns);
+
+      try {
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.adsbygoogle.push({});
+      } catch (error) {
+        console.error("Erro ao carregar AdSense:", error);
+      }
 
       setTimeout(() => {
-        const ampAdElement = contentRef.current?.querySelector(
-          "amp-ad"
+        const adsenseElement = contentRef.current?.querySelector(
+          ".adsbygoogle"
         ) as HTMLElement | null;
         const adDisplayed =
-          (ampAdElement && ampAdElement.clientHeight > 0) ||
+          (adsenseElement && adsenseElement.clientHeight > 0) ||
           contentRef.current?.querySelector("iframe") !== null;
 
         setIsAdBlocked(!adDisplayed);
@@ -44,8 +52,8 @@ const SponsoredContent: React.FC = () => {
         {isAdBlocked && (
           <div className={module.ads__alternative}>
             <p className={module.ads__alternative_text}>
-              {/* Parece que você está usando um bloqueador de anúncios. */}
-              Aqui vai um anúncio patrocinado.
+              Parece que você está usando um bloqueador de anúncios.
+              {/*  Aqui vai um anúncio patrocinado. */}
             </p>
             <p className={module.ads__alternative_message}>
               {/* Por favor, considere desativar o bloqueador para este site. */}
