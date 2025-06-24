@@ -13,34 +13,45 @@ const SponsoredContent: React.FC = () => {
 
   useEffect(() => {
     if (contentRef.current) {
-      const adsenseIns = document.createElement("ins");
-      adsenseIns.className = "adsbygoogle";
-      adsenseIns.style.display = "block";
-      adsenseIns.setAttribute("data-ad-client", "ca-pub-3126913255092932");
-      adsenseIns.setAttribute("data-ad-slot", "8403750929");
-      adsenseIns.setAttribute("data-ad-format", "auto");
-      adsenseIns.setAttribute("data-full-width-responsive", "true");
+      const timer = setTimeout(() => {
+        if (contentRef.current) {
+          const adsenseIns = document.createElement("ins");
+          adsenseIns.className = "adsbygoogle";
+          adsenseIns.style.display = "block";
+          adsenseIns.style.width = "100%";
+          adsenseIns.style.height = "100px";
+          adsenseIns.setAttribute("data-ad-client", "ca-pub-3126913255092932");
+          adsenseIns.setAttribute("data-ad-slot", "8403750929");
+          adsenseIns.setAttribute("data-ad-format", "rectangle");
+          adsenseIns.setAttribute("data-full-width-responsive", "true");
 
-      contentRef.current.innerHTML = "";
-      contentRef.current.appendChild(adsenseIns);
+          contentRef.current.innerHTML = "";
+          contentRef.current.appendChild(adsenseIns);
 
-      try {
-        window.adsbygoogle = window.adsbygoogle || [];
-        window.adsbygoogle.push({});
-      } catch (error) {
-        console.error("Erro ao carregar AdSense:", error);
-      }
+          setTimeout(() => {
+            try {
+              window.adsbygoogle = window.adsbygoogle || [];
+              window.adsbygoogle.push({});
+            } catch (error) {
+              console.error("Erro ao carregar AdSense:", error);
+              setIsAdBlocked(true);
+            }
+          }, 300);
 
-      setTimeout(() => {
-        const adsenseElement = contentRef.current?.querySelector(
-          ".adsbygoogle"
-        ) as HTMLElement | null;
-        const adDisplayed =
-          (adsenseElement && adsenseElement.clientHeight > 0) ||
-          contentRef.current?.querySelector("iframe") !== null;
+          setTimeout(() => {
+            const adsenseElement = contentRef.current?.querySelector(
+              ".adsbygoogle"
+            ) as HTMLElement | null;
+            const adDisplayed =
+              (adsenseElement && adsenseElement.clientHeight > 0) ||
+              contentRef.current?.querySelector("iframe") !== null;
 
-        setIsAdBlocked(!adDisplayed);
-      }, 30000);
+            setIsAdBlocked(!adDisplayed);
+          }, 10000);
+        }
+      }, 100);
+
+      return () => clearTimeout(timer);
     }
   }, []);
 
