@@ -17,8 +17,8 @@ const SponsoredContent: React.FC = () => {
         if (contentRef.current) {
           const adsenseIns = document.createElement("ins");
           adsenseIns.className = "adsbygoogle";
-          adsenseIns.style.display = "block";
-          adsenseIns.style.width = "100%";
+          adsenseIns.style.display = "inline-block";
+          adsenseIns.style.width = "728px";
           adsenseIns.style.height = "100px";
           adsenseIns.setAttribute("data-ad-client", "ca-pub-3126913255092932");
           adsenseIns.setAttribute("data-ad-slot", "8403750929");

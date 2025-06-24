@@ -2,6 +2,10 @@
   margin: 20px auto;
   max-width: 1566px;
   font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .ads__container {
