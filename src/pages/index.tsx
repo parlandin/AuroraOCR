@@ -26,8 +26,8 @@ const IndexPage: React.FC = () => {
       <Header />
       {!isMobile && (
         <SponsoredContent
-          adClient="1234567890"
-          adSlot="ca-pub-1234567890123456"
+          adClient="8403750929"
+          adSlot="ca-pub-3126913255092932"
         />
       )}
 
@@ -41,8 +41,8 @@ const IndexPage: React.FC = () => {
 
       {isMobile && (
         <SponsoredContent
-          adClient="1234567890"
-          adSlot="ca-pub-1234567890123456"
+          adClient="8403750929"
+          adSlot="ca-pub-3126913255092932"
         />
       )}
 
