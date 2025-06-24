@@ -9,7 +9,7 @@ const SponsoredContent: React.FC = () => {
     if (contentRef.current) {
       const ampAd = document.createElement("amp-ad");
       ampAd.setAttribute("width", "100vw");
-      ampAd.setAttribute("height", "100");
+      ampAd.setAttribute("height", "320");
       ampAd.setAttribute("type", "adsense");
       ampAd.setAttribute("data-ad-client", "ca-pub-3126913255092932");
       ampAd.setAttribute("data-ad-slot", "8403750929");
