@@ -7,7 +7,15 @@ declare global {
   }
 }
 
-const SponsoredContent: React.FC = () => {
+interface SponsoredContentProps {
+  adClient?: string;
+  adSlot?: string;
+}
+
+const SponsoredContent: React.FC<SponsoredContentProps> = ({
+  adClient,
+  adSlot,
+}) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [isAdBlocked, setIsAdBlocked] = useState(false);
 
@@ -20,10 +28,12 @@ const SponsoredContent: React.FC = () => {
           adsenseIns.style.display = "inline-block";
           adsenseIns.style.width = "728px";
           adsenseIns.style.height = "100px";
-          adsenseIns.setAttribute("data-ad-client", "ca-pub-3126913255092932");
-          adsenseIns.setAttribute("data-ad-slot", "8403750929");
+          adsenseIns.setAttribute(
+            "data-ad-client",
+            adClient || "ca-pub-1234567890123456"
+          );
+          adsenseIns.setAttribute("data-ad-slot", adSlot || "1234567890");
           adsenseIns.setAttribute("data-full-width-responsive", "true");
-
           contentRef.current.innerHTML = "";
           contentRef.current.appendChild(adsenseIns);
 

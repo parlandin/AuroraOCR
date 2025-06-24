@@ -6,10 +6,12 @@ import Resources from "@components/Resources";
 import FAQ from "@components/FAQ";
 import Footer from "@components/Footer";
 import SponsoredContent from "@components/Sponsored";
+import useIsMobile from "@hooks/useIsMobile";
 
 const IndexPage: React.FC = () => {
   const [image, setImage] = useState<string | null>("");
   const [currentPage, setCurrentPage] = useState<string>("index");
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (image) {
@@ -22,7 +24,12 @@ const IndexPage: React.FC = () => {
   return (
     <>
       <Header />
-      <SponsoredContent />
+      {!isMobile && (
+        <SponsoredContent
+          adClient="1234567890"
+          adSlot="ca-pub-1234567890123456"
+        />
+      )}
 
       <>
         {currentPage === "image" ? (
@@ -32,8 +39,31 @@ const IndexPage: React.FC = () => {
         )}
       </>
 
+      {isMobile && (
+        <SponsoredContent
+          adClient="1234567890"
+          adSlot="ca-pub-1234567890123456"
+        />
+      )}
+
       <Resources />
+
+      {!isMobile && (
+        <SponsoredContent
+          adClient="4564394486"
+          adSlot="ca-pub-3126913255092932"
+        />
+      )}
+
       <FAQ />
+
+      {isMobile && (
+        <SponsoredContent
+          adClient="4564394486"
+          adSlot="ca-pub-3126913255092932"
+        />
+      )}
+
       <Footer />
     </>
   );
