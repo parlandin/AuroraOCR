@@ -40,7 +40,7 @@ const SponsoredContent: React.FC = () => {
           contentRef.current?.querySelector("iframe") !== null;
 
         setIsAdBlocked(!adDisplayed);
-      }, 10000);
+      }, 30000);
     }
   }, []);
 
