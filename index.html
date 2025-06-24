@@ -70,7 +70,9 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-      gtag("config", "G-VV79PCH8TH");
+      gtag("config", "G-VV79PCH8TH", {
+        cookie_flags: "SameSite=None; Secure",
+      });
     </script>
   </head>
   <body>
