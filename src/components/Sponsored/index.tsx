@@ -42,7 +42,10 @@ const SponsoredContent: React.FC = () => {
               ".adsbygoogle"
             ) as HTMLElement | null;
             const adDisplayed =
-              (adsenseElement && adsenseElement.clientHeight > 0) ||
+              (adsenseElement &&
+                adsenseElement.getAttribute("data-adsbygoogle-status") ===
+                  "done" &&
+                adsenseElement.getAttribute("data-ad-status") === "filled") ||
               contentRef.current?.querySelector("iframe") !== null;
 
             setIsAdBlocked(!adDisplayed);
@@ -57,7 +60,9 @@ const SponsoredContent: React.FC = () => {
   return (
     <div className={module.ads}>
       <div className={module.ads__container}>
-        <div className={module.ads__content} ref={contentRef}></div>
+        {!isAdBlocked && (
+          <div className={module.ads__content} ref={contentRef}></div>
+        )}
 
         {isAdBlocked && (
           <div className={module.ads__alternative}>
