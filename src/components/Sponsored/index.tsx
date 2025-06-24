@@ -22,7 +22,6 @@ const SponsoredContent: React.FC = () => {
           adsenseIns.style.height = "100px";
           adsenseIns.setAttribute("data-ad-client", "ca-pub-3126913255092932");
           adsenseIns.setAttribute("data-ad-slot", "8403750929");
-          adsenseIns.setAttribute("data-ad-format", "rectangle");
           adsenseIns.setAttribute("data-full-width-responsive", "true");
 
           contentRef.current.innerHTML = "";

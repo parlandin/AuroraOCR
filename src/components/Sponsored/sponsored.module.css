@@ -6,6 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
 }
 
 .ads__container {
@@ -16,6 +17,8 @@
   max-height: 100px;
   height: 100%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .ads__content {
@@ -24,6 +27,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 728px;
+  max-height: 100px;
 }
 
 .ads__alternative {
