@@ -26,8 +26,8 @@ const IndexPage: React.FC = () => {
       <Header />
       {!isMobile && (
         <SponsoredContent
-          adClient="8403750929"
-          adSlot="ca-pub-3126913255092932"
+          adSlot="8403750929"
+          adClient="ca-pub-3126913255092932"
         />
       )}
 
@@ -41,8 +41,8 @@ const IndexPage: React.FC = () => {
 
       {isMobile && (
         <SponsoredContent
-          adClient="8403750929"
-          adSlot="ca-pub-3126913255092932"
+          adSlot="8403750929"
+          adClient="ca-pub-3126913255092932"
         />
       )}
 
@@ -50,8 +50,8 @@ const IndexPage: React.FC = () => {
 
       {!isMobile && (
         <SponsoredContent
-          adClient="4564394486"
-          adSlot="ca-pub-3126913255092932"
+          adSlot="4564394486"
+          adClient="ca-pub-3126913255092932"
         />
       )}
 
@@ -59,8 +59,8 @@ const IndexPage: React.FC = () => {
 
       {isMobile && (
         <SponsoredContent
-          adClient="4564394486"
-          adSlot="ca-pub-3126913255092932"
+          adSlot="4564394486"
+          adClient="ca-pub-3126913255092932"
         />
       )}
 
